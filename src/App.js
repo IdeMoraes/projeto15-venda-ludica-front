@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { useState } from "react";
+import {Route, Routes, BrowserRouter} from 'react-router-dom';
+import UserContext from "./contexts/UserContext";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+
+function App(){
+    const [userToken, setUserToken] = useState('');
+    return(
+        <UserContext.Provider value={{userToken, setUserToken}}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Login/>}/>
+                    <Route path="/sign-up" element={<SignUp/>}/>
+                </Routes>
+            </BrowserRouter>
+        </UserContext.Provider>
+    )
 }
 
 export default App;
