@@ -16,7 +16,7 @@ export function postSignUp(signUp){
     return promise;
 }
 
-/*export function getProducts(){
-    const config = createHeaders();
-    const promise = axios.get(`${BASE_URL}/products`, config);
-}*/
+export function getProducts(){
+    const promise = axios.get(`${BASE_URL}/products`);
+    return promise;
+}
