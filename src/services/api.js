@@ -15,3 +15,8 @@ export function postSignUp(signUp){
     const promise = axios.post(`${BASE_URL}/sign-up`, signUp);
     return promise;
 }
+
+export function getProducts(){
+    const promise = axios.get(`${BASE_URL}/products`);
+    return promise;
+}
