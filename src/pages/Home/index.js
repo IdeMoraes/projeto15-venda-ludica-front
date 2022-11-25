@@ -31,7 +31,7 @@ function Home(){
         </Container>   
     )*/
     return(
-        <div>Esta será a página de Home, espero que não de erro </div>
+        <div>Esta será a página de Home, espero que não de erro 2</div>
     )
 }
 
