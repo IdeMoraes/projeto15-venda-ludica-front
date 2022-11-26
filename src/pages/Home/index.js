@@ -10,7 +10,7 @@ import Navbar from "./Navbar";
 
 function Home(){
     const [products, setProducts] = useState([]);
-    const [search, setSearch] = useState('Dom');
+    const [search, setSearch] = useState('');
     const [showProducts, setShowProducts] = useState([]);
     const [message, setMessage] = useState("");
     useEffect(() => {
