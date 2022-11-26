@@ -4,8 +4,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {postSignUp} from "../../services/api.js"
 
-//###
-
 function SignUp(){
     const navigate = useNavigate();
     const[form, setForm]= useState({});
@@ -131,3 +129,6 @@ const Container = styled.div`
         line-height: 18px;
       }
 `
+export {
+    Container
+};
