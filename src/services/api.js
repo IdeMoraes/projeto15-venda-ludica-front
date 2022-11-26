@@ -16,6 +16,11 @@ export function postSignUp(signUp){
     return promise;
 }
 
+export function postLogin(login){
+    const promise = axios.post(`${BASE_URL}/login`, login);
+    return promise;
+};
+
 export function getProducts(){
     const promise = axios.get(`${BASE_URL}/products`);
     return promise;
