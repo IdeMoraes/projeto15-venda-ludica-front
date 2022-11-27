@@ -81,7 +81,7 @@ const Container = styled.div`
     height: 100vh;
     width:100%;
     background-color: black;
-    font-family: 'Raleway';
+    font-family: 'Raleway', sans-serif;
     h1{
         font-family: 'Saira Stencil One';
         font-style: normal;

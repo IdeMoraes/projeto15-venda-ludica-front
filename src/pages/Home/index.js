@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../../services/api";
 //import axios from "axios"
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 
 function Home(){
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState('');
     const [showProducts, setShowProducts] = useState([]);
@@ -61,36 +63,36 @@ function Home(){
     }
     return(
         <>
-        <Container>
-        <form onSubmit={filterAray}>
-        <input
-        type="text"
-        placeholder= "Pesquise pelo nome do produto"
-        onChange= {(e)=>setSearch(e.target.value)}
-        /> 
-        <button type="submit"><ion-icon name="search"></ion-icon></button>
-        </form>
-        <Categorias>
-        <h1 onClick={()=>filterAll()}>Todos</h1>
-        <h1 onClick={()=>filterBooks()}>Livros</h1>
-        <h1 onClick={()=>filterAlbuns()}>Álbuns</h1>
-        <h1 onClick={()=>filterJogos()}>Jogos</h1>
-        <h1 onClick={()=>filterFilmes()}>Filmes</h1>
-        <h1 onClick={()=>filterSeries()}>Séries de TV</h1>
-        </Categorias>
-        <Message className={message.length!==0? "aparece": "some"}>
-            <h2>{message}</h2>
-            <h1 onClick={()=>filterAll()}>Voltar a comprar</h1>
-        </Message>
-        <ContainerProducts className={message.length===0? "aparece": "some"}>
-            {showProducts.length!==0 ? showProducts.map((p)=>
-            <Product><h1>{p.name}</h1><img src={p.image}/><h1>{p.price}</h1></Product>)
-            :
-            products.map((p)=>
-            <Product><h1>{p.name}</h1><img src={p.image}/><h1>{p.price}</h1></Product>)}
-        </ContainerProducts>
-        </Container>
-        <Navbar/>   
+            <Container>
+                <form onSubmit={filterAray}>
+                    <input
+                    type="text"
+                    placeholder= "Pesquise pelo nome do produto"
+                    onChange= {(e)=>setSearch(e.target.value)}
+                    /> 
+                    <button type="submit"><ion-icon name="search"></ion-icon></button>
+                </form>
+                <Categorias>
+                    <h1 onClick={()=>filterAll()}>Todos</h1>
+                    <h1 onClick={()=>filterBooks()}>Livros</h1>
+                    <h1 onClick={()=>filterAlbuns()}>Álbuns</h1>
+                    <h1 onClick={()=>filterJogos()}>Jogos</h1>
+                    <h1 onClick={()=>filterFilmes()}>Filmes</h1>
+                    <h1 onClick={()=>filterSeries()}>Séries de TV</h1>
+                </Categorias>
+                <Message className={message.length!==0? "aparece": "some"}>
+                    <h2>{message}</h2>
+                    <h1 onClick={()=>filterAll()}>Voltar a comprar</h1>
+                </Message>
+                <ContainerProducts className={message.length===0? "aparece": "some"}>
+                    {showProducts.length!==0 ? showProducts.map((p)=>
+                    <Product onClick={()=>{navigate(`/products/${p._id.toString()}`)}}><h1>{p.name}</h1><img src={p.image}/><h1>{p.price}</h1></Product>)
+                    :
+                    products.map((p)=>
+                    <Product onClick={()=>{navigate(`/products/${p._id.toString()}`)}}><h1>{p.name}</h1><img src={p.image}/><h1>{p.price}</h1></Product>)}
+                </ContainerProducts>
+            </Container>
+            <Navbar/>   
         </>
     )
 }
