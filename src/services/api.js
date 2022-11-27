@@ -24,4 +24,9 @@ export function postLogin(login){
 export function getProducts(){
     const promise = axios.get(`${BASE_URL}/products`);
     return promise;
-}
+};
+
+export function getProduct(productId){
+    const promise = axios.get(`${BASE_URL}/products/${productId}`);
+    return promise;
+};
