@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import Navbar from "../Home/Navbar.js";
 import { useNavigate, useParams } from "react-router-dom";
-import { getProduct } from "../../services/api.js";
+import { getProduct, postCart } from "../../services/api.js";
 import UserContext from "../../contexts/UserContext.js";
 
 
@@ -12,6 +12,7 @@ function ProductPage(){
     const {userToken} = useContext(UserContext)
     const parameter = useParams();
     const [product, setProduct] = useState([]);
+    const [quantity, setQuantity] = useState(0);
     useEffect(() => {
         getProduct(parameter.productId)
           .then((response) => {
@@ -21,10 +22,14 @@ function ProductPage(){
       }, []);
     
     function handleAdding(){
+        const newProductToCart = {productId: parameter.productId, quantity};
         if(userToken){
-            alert("Essa funcionalidade ainda será implementada");
+            postCart(newProductToCart, userToken);
+            alert("Produto adicionado ao carrinho com sucesso.");
+            navigate("/home");
         }
         else{
+            alert("Faça login para adicionar produtos ao carrinho.");
             navigate("/");
         }
 
@@ -35,7 +40,7 @@ function ProductPage(){
                 <Name> {product.name}</Name>
                 <img src={product.image}/>
                 <div > R${product.price? product.price.slice(0,-2) + "," + product.price.slice(-2) : ""}</div>
-                <div > {product.description}</div>
+                <Description> {product.description}</Description>
                 <Details>
                     <div> <bold>Categoria: </bold>{product.department}</div>
                     {product.author? <div><bold>Autor:  </bold>{product.author}</div> : <></>}
@@ -48,10 +53,10 @@ function ProductPage(){
                     {product.productionCompany? <div><bold>Empresa produtora: </bold>{product.productionCompany}</div> : <></>}
                     {product.release? <div><bold>Lançamento: </bold>{product.release}</div> : <></>}
                     {product.language? <div><bold>Idioma: </bold>{product.language}</div> : <></>}
-                    {product.developer? "Desenvolvedora: " + product.developer : <></>}
+                    {product.developer? <div><bold>Desenvolvedora: </bold>{product.developer}</div> : <></>}
                     <div> <bold>Formato: </bold>{product.format}</div>
                 </Details>
-                <div> Quantidade desejada: {product.stock? <input type={"number"} min={0} max={product.stock}></input>:<input type={"number"} min={0}></input>}</div>
+                <div> Quantidade desejada: {product.stock? <input type={"number"} min={0} max={product.stock} onChange={(e)=>setQuantity(e.target.value)}></input>:<input type={"number"} min={0}></input>}</div>
                 {product.stock? <div>({product.stock} em estoque)</div> : ""}
                 <button onClick={handleAdding}>Adicionar ao carrinho</button>
             </Container>
@@ -80,9 +85,6 @@ const Container = styled.div`
     };
     div{
         margin-bottom: 15px;
-        text-align: justify;
-        text-justify: auto;
-        max-width: 326px;
     };
     input{
         width: 50px;
@@ -116,6 +118,11 @@ const Details = styled.div`
     }
 `;
 const Name = styled.div`
-font-size: 20px;
-font-weight: bolder;
+    font-size: 20px;
+    font-weight: bolder;
+`;
+const Description = styled.div`
+    text-align: justify;
+    text-justify: auto;
+    max-width: 326px;
 `;
