@@ -56,7 +56,7 @@ function ProductPage(){
                     {product.developer? <div><bold>Desenvolvedora: </bold>{product.developer}</div> : <></>}
                     <div> <bold>Formato: </bold>{product.format}</div>
                 </Details>
-                <div> Quantidade desejada: {product.stock? <input type={"number"} min={0} max={product.stock} onChange={(e)=>setQuantity(e.target.value)}></input>:<input type={"number"} min={0}></input>}</div>
+                <div> Quantidade desejada: {product.stock? <input type={"number"} min={0} max={product.stock} onChange={(e)=>setQuantity(parseInt(e.target.value))}></input>:<input type={"number"} min={0}></input>}</div>
                 {product.stock? <div>({product.stock} em estoque)</div> : ""}
                 <button onClick={handleAdding}>Adicionar ao carrinho</button>
             </Container>
