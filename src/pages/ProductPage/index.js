@@ -24,6 +24,10 @@ function ProductPage(){
     function handleAdding(){
         const newProductToCart = {productId: parameter.productId, quantity};
         if(userToken){
+            if(newProductToCart.quantity>product.stock){
+                alert("Não peça mais do que temos para vender.");
+                return;
+            }
             postCart(newProductToCart, userToken);
             alert("Produto adicionado ao carrinho com sucesso.");
             navigate("/home");
