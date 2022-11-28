@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App(){
     const [userToken, setUserToken] = useState('');
@@ -17,6 +18,7 @@ function App(){
                     <Route path="/sign-up" element={<SignUp/>}/>
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/products/:productId" element={<ProductPage/>}/>
+                    <Route path="/checkout" element={<CheckoutPage/>}/>
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
