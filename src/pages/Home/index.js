@@ -26,7 +26,7 @@ function Home(){
     function filterAray(e){
         e.preventDefault();
         setMessage("");
-        const productsFilter = products.filter((element)=>element.name.includes(search));
+        const productsFilter = products.filter((element)=>element.name.toUpperCase().includes(search.toUpperCase()));
         if(productsFilter.length===0){
             setMessage(`Nenhum produto encontrado com ${search}`)
         }

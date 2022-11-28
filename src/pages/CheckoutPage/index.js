@@ -10,23 +10,24 @@ function CheckoutPage(){
     const navigate = useNavigate();
     const [adress, setAdress] = useState({});
     const [recipient, setRecipient] = useState({});
-    const [payment, setPayment] = useState({});
 
     function sendForm(e){
         e.preventDefault();
-        const body = {
-            adress,
-            recipient,
-            payment
-        }
+        const body =
+            {
+                adress,
+                recipient,
+                payment: {paymentMethod: "Boleto"}
+            };
         postOrder(body, userToken)
           .then((res) => {
+            console.log(body);
             alert("Pedido efetuado com sucesso.");
             navigate("/home");
           })
           .catch((error) => {
             alert(`
-          ${error.response.data.message} 
+          ${error.message} 
           Seu pedido não foi efetuado!`);
           });
     };
@@ -34,21 +35,14 @@ function CheckoutPage(){
         setAdress({
             ...adress,
             [e.target.name]: e.target.value
-        })
+        });
     };
     function updateRecipient(e){
         setRecipient({
             ...recipient,
             [e.target.name]: e.target.value
-        })
+        });
     };
-    function updatePayment(e){
-        setPayment({
-            ...payment,
-            [e.target.name]: e.target.value
-        })
-    };
-
     const mystyle = {
         color: "white",
         marginBottom: "10px"
@@ -147,14 +141,12 @@ function CheckoutPage(){
                     autoComplete="off"
                     value="Boleto"
                     disabled="disabled"
-                    onChange={updatePayment}
                 />
                 <button type="submit" style={{marginBottom: "80px"}}>Efetuar pedido</button>
             </form>
         </Container>
         <Navbar/>
         </>
-
     )
 }
 
