@@ -13,7 +13,7 @@ function Cart(){
         getCart(userToken)
           .then((response) => {
             setCartProducts(response.data);
-            console.log(cartProducts);
+            console.log(response.data);
         })
           .catch((error) => console.log(error));
           console.log(userToken);

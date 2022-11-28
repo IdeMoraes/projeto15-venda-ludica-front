@@ -15,6 +15,7 @@ function Login(){
             postLogin(form)
               .then((response) => {
                 setUserToken(response.data.token)
+                console.log(response.data.token);
                 navigate("/home");
               })
               .catch((error) => {
