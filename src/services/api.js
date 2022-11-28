@@ -39,6 +39,7 @@ export function postCart(newProductToCart, token){
     return promise;
 };
 
+
 export function postOrder(body, token){
     const config = {
         headers: { Authorization: `Bearer ${token}` }
@@ -46,3 +47,12 @@ export function postOrder(body, token){
     const promise = axios.post(`${BASE_URL}/orders`, body, config);
     return promise;
 };
+
+export function getCart(token){
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+    const promise = axios.get(`${BASE_URL}/cart`, config);
+    return promise;
+}
+
