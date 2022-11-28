@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext.js";
+import { postOrder } from "../../services/api.js";
 import Navbar from "../Home/Navbar.js";
 import {Container} from "../SignUp/index.js";
 
 function CheckoutPage(){
     const {userToken} = useContext(UserContext);
+    const navigate = useNavigate();
     const [adress, setAdress] = useState({});
     const [recipient, setRecipient] = useState({});
     const [payment, setPayment] = useState({});
