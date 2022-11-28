@@ -27,7 +27,7 @@ function CheckoutPage(){
           .catch((error) => {
             alert(`
           ${error.response.data.message} 
-          Seu pedido não foi efetuado.`);
+          Seu pedido não foi efetuado!`);
           });
     };
     function updateAdress(e){
