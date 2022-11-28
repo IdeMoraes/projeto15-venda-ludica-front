@@ -19,8 +19,9 @@ function Login(){
                 navigate("/home");
               })
               .catch((error) => {
+                console.log(error);
                 alert(`
-              ${error.response.data.message} 
+              ${error.message} 
               Por favor preencha os campos novamente.`);
               });
         }

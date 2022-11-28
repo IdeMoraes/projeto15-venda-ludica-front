@@ -14,12 +14,17 @@ function Cart(){
         getCart(userToken)
           .then((response) => {
             setCartProducts(response.data);
-            console.log(response.data);
+            //console.log(response.data);
         })
           .catch((error) => console.log(error));
           console.log(userToken);
       }, []);
     function closeCart(){
+      if(!userToken){
+        alert("Faça login para adicionar produtos ao carrinho.");
+        navigate("/");
+        return;
+      }
       navigate("/checkout");
     }
     return(
@@ -51,6 +56,7 @@ const Container = styled.div`
   align-items: center;
   background-color: #f4f4f4;
   min-height: 100vh;
+  padding-bottom: 90px;
   h1{
     margin-top:20px;
     margin-bottom:20px;
